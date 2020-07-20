@@ -7,7 +7,11 @@ flex-direction: row;
 background-color: #333;
 justify-content: space-between; 
 `;
+
 const TopNav = styled.div`
+@media (max-width: 768px) {
+   display: none; 
+ }
 background-color: #333;
 overflow: hidden;
 >a {
@@ -27,23 +31,31 @@ const Logo = styled.div`
   background: url(/img/logo1.png);
   background-repeat: no-repeat;
   background-size: contain;
-
-
 `;
+
+const Toogle = styled.div`
+  @media (min-width: 768px) {
+    display: none; 
+    background: url(/img/toogle.png);
+  }
+`
 
 function Navbar() {
   return <Wraped>
             <Logo>
             </Logo>
-            <TopNav >
+            <TopNav>
               <a href="#home" class="active">Home</a>
               <a href="#news">News</a>
               <a href="#contact">Contact</a>
               <a href="#about">About</a>
-              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <a href="javascript:void(0);" class="icon" onClick="myFunction()">
               <i class="fa fa-bars"></i>
               </a>
             </TopNav>
+            <Toogle>
+              <a onClick=""></a>
+            </Toogle>
           </Wraped>;
 }
 
