@@ -20,8 +20,7 @@ overflow: hidden;
   float: left;
   display: block;
   color: #f2f2f2;
-color: ${props=>props.open === 'close'? 'red':'green'};
-
+  color: ${props=>props.responsive === false ? 'yellow':'red'};
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -29,8 +28,17 @@ color: ${props=>props.open === 'close'? 'red':'green'};
 }
 `;
 
-
-
+const TopNavVertical = styled.div`
+  position:fixed;
+  top:0;
+  right:0;
+  width:${props=>props.width}px;
+  height:300px;
+  background:pink;
+  transition: width 2s ease-in-out;
+  transform: translateX(0%);
+    transition: transform 0.4s ease-in-out;
+`;
 const Logo = styled.div`
   width: 60px;
   height: 60px;
@@ -39,7 +47,7 @@ const Logo = styled.div`
   background-size: contain;
 `;
 
-const Toogle = styled.div`
+const ToogleIcon = styled.div`
   @media (max-width: 768px) {
     display: flex; 
   }
@@ -49,37 +57,51 @@ const Toogle = styled.div`
   color: red; 
   background: url(/img/toogle.png)
   
-`
+`;
+const IconClose = styled.div`
+position:relative;
+
+`;
 
 function Navbar() {
-  //declaro una funcion de estado
-  const [toogleClass,setToogleClass] = useState("close"); 
+  //declaro una funcion de estado // el array esta compuesto por el estado (primer parametro) y la funcion para cambiar el estado (segundo parametro)
+  const [toogleClass,setToogleClass] = useState(false); 
+const [navWidht, setWidthNav] =useState("0px")
   //aplico cambios al state a traves de la funcion handleToogle que emite el evento onClick
   console.log(toogleClass)
+
   function handleToogle(){
-    alert("hola")
-    if(toogleClass==="close"){
-      setToogleClass("open")
+
+    if(toogleClass===false){
+      setToogleClass(true)
+      setWidthNav("200")
     }
-    if(toogleClass==="open"){
-      setToogleClass("close")
+    if(toogleClass===true){
+      setToogleClass(false)
+      setWidthNav("0")
     }
+    console.log(toogleClass)
   }
+
   return <Wraped>
             <Logo>
             </Logo>
-            <TopNav className={toogleClass}  open={toogleClass}>
-              <a href="#home" class="active">Home</a>
+            <TopNav responsive={toogleClass}>
+              <a href="#home" className="active">Home</a>
               <a href="#news">News</a>
               <a href="#contact">Contact</a>
               <a href="#about">About</a>
-              <a href="javascript:void(0);" class="icon" onClick="myFunction()">
-              <i class="fa fa-bars"></i>
+              <a href="javascript:void(0);" className="icon" onClick="myFunction()">
+              <i className="fa fa-bars"></i>
               </a>
             </TopNav>
-            <Toogle onClick={handleToogle}>
-            </Toogle>
+           { toogleClass &&
+           <TopNavVertical width={navWidht}><IconClose onClick={handleToogle}>X</IconClose></TopNavVertical>
+          }  
+            <ToogleIcon onClick={handleToogle}>
+            </ToogleIcon>
           </Wraped>;
 }
+
 
 export default Navbar
