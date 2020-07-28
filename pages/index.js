@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Navbar from '../components/Navbar'
+import NavBar from '../components/Nav/NavBar'
 
 
 export default function Home() {
@@ -9,15 +9,10 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <NavBar>
+        
+      </NavBar>
       
-      <Navbar>
-        
-        
-        
-      </Navbar>
-        
-     
 
       <footer>
         <a
